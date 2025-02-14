@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Gadgets\SettingsTree\Models\**" />
+    <EmbeddedResource Remove="Gadgets\SettingsTree\Models\**" />
+    <None Remove="Gadgets\SettingsTree\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPiServer.CloudPlatform.Cms" Version="1.7.0" />
     <PackageReference Include="EPiServer.CMS" Version="12.32.4" />
     <PackageReference Include="EPiServer.Find.Cms" Version="16.4.0" />

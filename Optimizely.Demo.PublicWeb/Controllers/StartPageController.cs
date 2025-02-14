@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Optimizely.Commerce.Demo.Models.Cms;
+using Optimizely.Demo.Cms.Core.Models.ViewModels;
 using Optimizely.Demo.Core.Controllers;
-using Optimizely.Demo.Core.Models.ViewModels;
 
 namespace Optimizely.Demo.PublicWeb.Controllers;
 

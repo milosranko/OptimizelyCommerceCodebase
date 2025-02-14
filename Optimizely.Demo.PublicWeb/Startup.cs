@@ -1,10 +1,11 @@
+using CmsContentScaffolding.Optimizely.Extensions;
 using CmsContentScaffolding.Optimizely.Models;
 using CmsContentScaffolding.Optimizely.Startup;
+using CmsContentScaffolding.Shared.Resources;
 using EPiServer.Cms.Shell;
 using EPiServer.Cms.Shell.UI;
 using EPiServer.Cms.UI.AspNetIdentity;
 using EPiServer.Commerce.Catalog.ContentTypes;
-using EPiServer.Find.Commerce;
 using EPiServer.Framework.Web.Resources;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
@@ -19,6 +20,7 @@ using Optimizely.Demo.Cms.Core.Business.Initialization;
 using Optimizely.Demo.Commerce.Models.Categories;
 using Optimizely.Demo.Commerce.Models.Products;
 using Optimizely.Demo.Commerce.Models.Variants;
+using Optimizely.Demo.ContentTypes.Blocks;
 using Optimizely.Demo.Core.Business.Rendering;
 using Optimizely.Demo.PublicWeb.Filters;
 using System.Globalization;
@@ -66,6 +68,12 @@ public class Startup
         }
 
         services
+            //.Configure<FindCommerceOptions>(o =>
+            //{
+            //    o.CatalogContentClientConventions.FindListenOnCommerceRemoteEvents = true;
+            //    o.CatalogContentClientConventions.FindIndexCatalogContent = true;
+            //})
+            //.Configure<FindCmsOptions>(o => o)
             .Configure<RazorViewEngineOptions>(o => o.ViewLocationExpanders.Add(new SiteViewEngineLocationExpander()))
             .Configure<MvcOptions>(o => o.Filters.Add<PageContextActionFilter>());
 
@@ -114,12 +122,6 @@ public class Startup
         //});
 
         #endregion
-
-        services.Configure<FindCommerceOptions>(o =>
-        {
-            o.CatalogContentClientConventions.FindListenOnCommerceRemoteEvents = true;
-            o.CatalogContentClientConventions.FindIndexCatalogContent = true;
-        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -137,11 +139,25 @@ public class Startup
                 o.SiteName = "Demo";
                 o.Language = CultureInfo.GetCultureInfo("en");
                 o.SiteHost = "https://localhost:5000";
-                o.BuildMode = BuildMode.Append;
+                o.BuildMode = BuildMode.OnlyIfEmpty;
+                o.PublishContent = true;
                 o.StartPageType = typeof(StartPage);
             },
             builder: b =>
             {
+                b.UsePages()
+                .WithStartPage<StartPage>(p =>
+                {
+                    p.Name = "Start Page";
+                    p.Heading = "Optimizely Commerce DEMO";
+                    p.MainContentArea
+                    .AddItem<TeaserBlock>(b =>
+                    {
+                        b.Heading = ResourceHelpers.Faker.Lorem.Slug();
+                        b.LeadText = ResourceHelpers.Faker.Lorem.Paragraph();
+                    });
+                });
+
                 b.UseAssets(referenceConverter.GetRootLink())
                 .WithContent<CatalogContent>(x =>
                 {
@@ -158,12 +174,12 @@ public class Startup
                                     .WithContent<FashionVariant>(v => v.Name = "Variant 2"))
                                 .WithContent<FashionProduct>(x => x.Name = "Product 2")
                                 .WithContent<FashionProduct>(x => x.Name = "Product 3")
-                         ).WithContent<FashionCategory>(x => x.Name = "Accessories", l3 =>
+                            ).WithContent<FashionCategory>(x => x.Name = "Accessories", l3 =>
                             l3
                             .WithContent<FashionProduct>(x => x.Name = "Product 1")
                             .WithContent<FashionProduct>(x => x.Name = "Product 2")
                             .WithContent<FashionProduct>(x => x.Name = "Product 3")
-                         )
+                            )
                     )
                 );
             });

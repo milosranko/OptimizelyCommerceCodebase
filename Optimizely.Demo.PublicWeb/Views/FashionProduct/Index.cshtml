@@ -1,0 +1,10 @@
+﻿@using Optimizely.Demo.Commerce.Models.Products.Base
+@using Optimizely.Demo.Commerce.Models.ViewModels
+@model IProductViewModel<ProductBase>
+@{
+    Layout = "~/Views/Shared/Layouts/_ProductLayout.cshtml";
+}
+
+<h1>
+    @Model.CurrentPage.Name
+</h1>
