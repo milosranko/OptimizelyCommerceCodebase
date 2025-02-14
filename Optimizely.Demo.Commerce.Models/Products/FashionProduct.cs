@@ -1,21 +1,23 @@
-﻿using EPiServer.Commerce.Catalog.ContentTypes;
-using EPiServer.Commerce.Catalog.DataAnnotations;
+﻿using EPiServer.Commerce.Catalog.DataAnnotations;
 using EPiServer.Commerce.SpecializedProperties;
 using EPiServer.Core;
 using EPiServer.DataAnnotations;
 using Optimizely.Commerce.Demo.Infrastructure.Constants;
+using Optimizely.Demo.Commerce.Models.Products.Base;
+using Optimizely.Demo.Commerce.Models.Variants;
 using System.ComponentModel.DataAnnotations;
 
-namespace Optimizely.Commerce.Demo.Models;
+namespace Optimizely.Demo.Commerce.Models.Products;
 
 [CatalogContentType(
     GUID = "74152223-99F0-4B3F-8FD0-DDCD535EC861",
-    MetaClassName = Infrastructure.Constants.MetaClassNames.FashionProduct,
+    MetaClassName = MetaClassNames.FashionProduct,
     GroupName = GroupNames.Fashion,
     DisplayName = "Fashion product",
     Description = "Fashion product with Add to Cart button.")]
+[AvailableContentTypes(Include = [typeof(FashionVariant)])]
 //[ImageUrl("~/Templates/thumbnail-fashion.png")]
-public class FashionProduct : ProductContent
+public class FashionProduct : ProductBase
 {
     [Searchable]
     [CultureSpecific]

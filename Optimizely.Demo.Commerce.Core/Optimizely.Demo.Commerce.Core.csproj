@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPiServer.CMS" Version="12.30.0" />
-    <PackageReference Include="EPiServer.Commerce" Version="14.28.0" />
+    <PackageReference Include="EPiServer.CloudPlatform.Commerce" Version="1.1.2" />
+    <PackageReference Include="EPiServer.CMS" Version="12.32.4" />
+    <PackageReference Include="EPiServer.Commerce" Version="14.34.0" />
+    <PackageReference Include="EPiServer.Find.Cms" Version="16.4.0" />
+    <PackageReference Include="EPiServer.Find.Commerce" Version="12.2.1" />
   </ItemGroup>
 
 </Project>

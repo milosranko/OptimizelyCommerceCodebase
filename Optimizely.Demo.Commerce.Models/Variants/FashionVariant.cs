@@ -1,11 +1,11 @@
-﻿using EPiServer.Commerce.Catalog.ContentTypes;
-using EPiServer.Commerce.Catalog.DataAnnotations;
+﻿using EPiServer.Commerce.Catalog.DataAnnotations;
 using EPiServer.Core;
 using EPiServer.DataAnnotations;
 using Optimizely.Commerce.Demo.Infrastructure.Constants;
+using Optimizely.Demo.Commerce.Models.Variants.Base;
 using System.ComponentModel.DataAnnotations;
 
-namespace Optimizely.Commerce.Demo.Models;
+namespace Optimizely.Demo.Commerce.Models.Variants;
 
 [CatalogContentType(
     GUID = "D27B133B-F9C5-438C-BC51-F4DE632BFC17",
@@ -14,7 +14,7 @@ namespace Optimizely.Commerce.Demo.Models;
     DisplayName = "Fashion variant",
     Description = "Display fashion variant")]
 //[ImageUrl("~/Templates/thumbnail-fashion.png")]
-public class FashionVariant : VariationContent
+public class FashionVariant : VariantBase
 {
     [Searchable]
     [Tokenize]
