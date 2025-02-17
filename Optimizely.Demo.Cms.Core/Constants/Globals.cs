@@ -28,6 +28,9 @@ public class Globals
 
         [Display(Name = "Specialized", Order = 70)]
         public const string Specialized = "Specialized";
+
+        [Display(Name = "Commerce", Order = 80)]
+        public const string Commerce = "Commerce";
     }
 
     public static class SiteUIHints
